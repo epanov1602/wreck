@@ -1,0 +1,44 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Map</title>
+    <style>
+
+body, html {
+  height: 100%;
+}
+
+button {
+  padding: 15px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+}
+
+#map-canvas {
+    border: 2px solid black;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    text-align: left;
+}
+
+    </style>
+  </head>
+
+  <body>
+
+    <center>
+      <div id="map-canvas" style="width: 720px; height: 400px;">
+	<pre id="log-window">loading... </pre>
+      </div>
+    </center>
+
+    <!-- the Javascript code for the Map page -->
+    <script src="logic.js"></script>
+
+    <!-- the Javascript code for connecting to Google Maps API, with my Google API key at the end -->
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&callback=onMapsAPIConnected&key=AIzaSyC4Oy0gZYxYEhv4SLXu3A-IepmrvBIbS10"></script>
+
+  </body>
+</html>

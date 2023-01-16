@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>let's go</title>
+<style>
+button img {
+  width: 100%;
+}
+
+html,
+body {
+  height: 100vh;
+  width: 100vw;
+}
+
+button img {
+  width: 100%;
+}
+
+#btLeft {
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  left: 20px;
+  top: 400px;
+}
+
+#bt2 {
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  left: 300px;
+  top: 400px;
+}
+
+#btRight {
+  width: 50px;
+  position: absolute;
+  height: 50px;
+  left: 570px;
+  top: 400px;
+}
+
+#logWindow {
+  width: 640px;
+  position: absolute;
+  height: 300px;
+  left: 0px;
+  top: 480px;
+}
+
+#theframe {
+  width: 100%;
+  height: 100%;
+}
+
+.holder {
+  width: 640px;
+  height: 480px;
+  position: relative;
+}
+
+</style>
+</head>
+<body>
+<div class="holder">
+  <iframe src="/rpicam" id="theframe" frameborder="0" allowfullscreen></iframe>
+
+  <button id="btLeft" onclick="sendCommand('go-left')">LEFT</button>
+  <button id="bt2" onclick="sendCommand('reset-video'); refreshIframe('theframe');">reset video</button>
+  <button id="btRight" onclick="sendCommand('go-right')">RIGHT</button>
+
+  <pre id="logWindow"></pre>
+</div>
+
+</body>
+
+<script src="logic.js"></script>
+
+</html>
