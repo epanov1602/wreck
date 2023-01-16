@@ -72,23 +72,23 @@ async def handler(websocket, path):
     # or maybe this client wants to control the movement?
     if path.endswith("/control"):
         while True:
-            msg = await websocket.recv()
-            print(f"Received: {msg}")
-            reply = respond(msg, websocket)
+            request = await websocket.recv()
+            reply = handle(request, websocket)
             await websocket.send(reply)
 
 
 
-def respond(msg, websocket):
-    if msg == "reset-video":
+def handle(request, websocket):
+    print(f"Received: {request}")
+    if request == "reset-video":
         Popen("killall libcamera-vid", shell=True).wait() # todo: switch to asyncio.Popen
         return "stopped old video server"
-    if msg == "go-right":
+    if request == "go-right":
         return "going right"
-    if msg == "go-left":
+    if request == "go-left":
         return "going left"
     # otherwise, we are here
-    return "unknown command: " + str(msg)
+    return "unknown command: " + str(request)
 
 
 start_server = websockets.serve(handler, "localhost", 8002)
