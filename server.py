@@ -4,6 +4,7 @@ import traceback
 import serial
 import pynmea2
 import queue
+import os
 
 from json import dumps
 from subprocess import Popen
@@ -36,16 +37,6 @@ def keep_running(cmd):
             print(f"started: {cmd}")
             ret = proc.wait()
             print(f"exit code {ret}: {cmd}")
-
-
-videoserver = Thread(target=keep_running, args=("libcamera-vid -t 0 --width 640 --height 480 --codec h264 --inline --listen -o tcp://0.0.0.0:8000", ))
-videoserver.start()
-
-websockify = Thread(target=keep_running, args=("websockify 0.0.0.0:8001 0.0.0.0:8000", ))
-websockify.start()
-
-gpsreader = Thread(target=read_gps, args=())
-gpsreader.start()
 
 
 def download_last_point():
@@ -91,6 +82,27 @@ def handle(request, websocket):
     return "unknown command: " + str(request)
 
 
-start_server = websockets.serve(handler, "localhost", 8002)
-asyncio.get_event_loop().run_until_complete(start_server)
+def generate_static_pages():
+    google_api_key = os.getenv("GOOGLE_API_KEY", "GOOGLE_API_KEY_NOT_FOUND")
+    map_page = os.path.join(os.path.dirname(__file__), "html/map/index.html")
+    print(f"Google API key: {google_api_key}")
+    with open(map_page + ".template", "r") as template:
+        with open(map_page, "w") as result:
+            result.write(template.read().replace("YOUR_GOOGLE_API_KEY", google_api_key))
+            print(f"Successfully created a static map page at {map_page}")
+
+
+generate_static_pages()
+
+videoserver = Thread(target=keep_running, args=("libcamera-vid -t 0 --width 640 --height 480 --codec h264 --inline --listen -o tcp://0.0.0.0:8000", ), daemon=True)
+videoserver.start()
+
+websockify = Thread(target=keep_running, args=("websockify 0.0.0.0:8001 0.0.0.0:8000", ), daemon=True)
+websockify.start()
+
+gpsreader = Thread(target=read_gps, args=(), daemon=True)
+gpsreader.start()
+
+webserver = websockets.serve(handler, "localhost", 8002)
+asyncio.get_event_loop().run_until_complete(webserver)
 asyncio.get_event_loop().run_forever()
