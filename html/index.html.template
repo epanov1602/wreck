@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta name="color-scheme" content="dark">
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jmuxer@2.0.4/dist/jmuxer.min.js"></script>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+<center>
+
+<!-- video box (from https://www.mkmark.net/blog/solution/raspberry-pi-libcamera-low-latency-http-streaming/), indeed results in lowest latency of all solutions I tried (even on Pi 1B!) -->
+<div id="videoBox">
+  <div class="vsc-controller"></div>
+  <video width="100%" autoplay muted id="player"></video>
+</div>
+
+<!-- buttons for sending commands to robot -->
+<div id="buttons">
+  <button id="btLeft" onclick="window.sendCommand('go-left')">LEFT</button>
+  <button id="btCenter" onclick="window.sendCommand('reset-video')">reset video</button>
+  <button id="btRight" onclick="window.sendCommand('go-right')">RIGHT</button>
+</div>
+
+<div id="mapCanvas"></div>
+<pre id="logWindow"></pre>
+
+<!-- code for connecting to camera, commands and maps -->
+<script src="logic.js"></script>
+
+<!-- code for connecting to Google Maps API, with my Google API key at the end -->
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&callback=onMapsAPIConnected&key=YOUR_GOOGLE_API_KEY" defer></script>
+
+<!-- code to establish all connections after the web page loads -->
+<script>
+  window.onload = function() {
+      connectToCommands();
+      connectToCamera();
+      connectToGPS();
+  };
+</script>
+
+</center>
+</body>
+
+
+</html>

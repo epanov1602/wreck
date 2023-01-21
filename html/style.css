@@ -1,0 +1,61 @@
+body {
+    margin: 0;
+}
+
+button img {
+  width: 100%;
+}
+
+button img {
+  width: 100%;
+}
+
+#btLeft {
+  width: 50px;
+  height: 50px;
+  position: absolute;
+  left: 20px;
+  top: 0px;
+}
+
+#btCenter {
+  width: 50px;
+  height: 50px;
+  position: absolute;
+  left: 300px;
+  top: 0px;
+}
+
+#btRight {
+  width: 50px;
+  height: 50px;
+  position: absolute;
+  left: 570px;
+  top: 0px;
+}
+
+#logWindow {
+  width: 640px;
+  height: 200px;
+  text-align: left;
+}
+
+#mapCanvas {
+  width: 640px;
+  height: 480px;
+  border: 2px solid black;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  text-align: left;
+}
+
+#buttons {
+  width: 640px;
+  height: 50px;
+  position: relative;
+}
+
+#videoBox {
+  width: 640px;
+  height: 480px;
+  position: relative;
+}
