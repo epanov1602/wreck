@@ -11,26 +11,34 @@ button img {
 }
 
 #btLeft {
-  width: 50px;
-  height: 50px;
+  width: 100px;
+  height: 100px;
   position: absolute;
   left: 20px;
   top: 0px;
 }
 
 #btCenter {
-  width: 50px;
-  height: 50px;
+  width: 100px;
+  height: 100px;
   position: absolute;
-  left: 300px;
-  top: 0px;
+  left: 570px;
+  top: 150px;
 }
 
 #btRight {
-  width: 50px;
-  height: 50px;
+  width: 100px;
+  height: 100px;
   position: absolute;
   left: 570px;
+  top: 0px;
+}
+
+#btForward {
+  width: 100px;
+  height: 100px;
+  position: absolute;
+  left: 300px;
   top: 0px;
 }
 
@@ -55,7 +63,7 @@ button img {
 }
 
 #videoBox {
-  width: 640px;
-  height: 480px;
+  width: 700px;
+  height: 500px;
   position: relative;
 }

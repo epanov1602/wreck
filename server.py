@@ -75,7 +75,7 @@ def generate_static_pages():
     google_api_key = os.getenv("GOOGLE_API_KEY", "GOOGLE_API_KEY_NOT_FOUND")
     map_page = os.path.join(os.path.dirname(__file__), "html/index.html")
     print(f"Google API key: {google_api_key}")
-    with open(map_page + ".template", "r") as template:
+    with open(map_page + ".template.html", "r") as template:
         with open(map_page, "w") as result:
             result.write(template.read().replace("YOUR_GOOGLE_API_KEY", google_api_key))
             print(f"Successfully created a static map page at {map_page}")

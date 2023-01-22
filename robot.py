@@ -17,7 +17,18 @@ async def handle_command(command):
         await asyncio.sleep(2)
         # stop spinning left motor
         pi.set_servo_pulsewidth(left_motor_pin, 0)
-        return "robot went right"
+        return "robot went of the bridge"
+    
+    if command == "go-forward":
+        # start spinning right motor
+        pi.set_servo_pulsewidth(right_motor_pin, 2000)
+        pi.set_servo_pulsewidth(left_motor_pin, 2000)
+        # wait 2 seconds
+        await asyncio.sleep(2)
+        # stop spinning right motor
+        pi.set_servo_pulsewidth(right_motor_pin, 0)
+        pi.set_servo_pulsewidth(left_motor_pin, 0)
+        return "robot went forward"
 
     if command == "go-left":
         # start spinning right motor
@@ -26,7 +37,7 @@ async def handle_command(command):
         await asyncio.sleep(2)
         # stop spinning right motor
         pi.set_servo_pulsewidth(right_motor_pin, 0)
-        return "robot went left"
+        return "robot went kaboom"
 
     if command == "reset-video":
         Popen("killall libcamera-vid", shell=True).wait() # todo: switch to asyncio.Popen
