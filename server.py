@@ -66,7 +66,7 @@ async def handler(websocket, path):
     if path.endswith("/control"):
         while True:
             request = await websocket.recv()
-            reply = robot.handle_command(request)
+            reply = await robot.handle_command(request)
             await websocket.send(reply)
 
 
