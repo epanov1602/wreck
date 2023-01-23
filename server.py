@@ -70,16 +70,19 @@ async def handler(websocket, path):
             await websocket.send(reply)
 
 
-
 def generate_static_pages():
     google_api_key = os.getenv("GOOGLE_API_KEY", "GOOGLE_API_KEY_NOT_FOUND")
     map_page = os.path.join(os.path.dirname(__file__), "html/index.html")
-    print(f"Google API key: {google_api_key}")
+    print(f"GOOGLE_API_KEY: {google_api_key}")
     with open(map_page + ".template.html", "r") as template:
         with open(map_page, "w") as result:
             result.write(template.read().replace("YOUR_GOOGLE_API_KEY", google_api_key))
             print(f"Successfully created a static map page at {map_page}")
 
+
+
+hostname = os.getenv("NGROK_HOSTNAME", "")
+print(f"NGROK_HOSTNAME: {hostname}")
 generate_static_pages()
 
 # (re)start camera stream
@@ -93,7 +96,6 @@ websockify = Thread(target=keep_running, args=("websockify 0.0.0.0:8001 0.0.0.0:
 websockify.start()
 
 # (re)start ngrok (if NGROK_HOSTNAME given), so we can see the web interface at address like my-awesome-address.ngrok.io
-hostname = os.getenv("NGROK_HOSTNAME", "")
 if hostname:
     Popen("killall ngrok", shell=True).wait()  # stop old websockify, if any
     ngrok = Thread(target=keep_running, args=(f"ngrok http --region=us --hostname={hostname} 80 --scheme http --log ngrok.log", ), daemon=True)
