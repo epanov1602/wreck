@@ -62,7 +62,7 @@ async def handle_command(command):
 def _stop():
     global pi, right_motor_pin, left_motor_pin
     print("Stopping pigpio connection")
-    # 0 means "shutdown" here (in the case of drones/planes it means "failsafe": for example, return home and land)
+    # 0 means "shutdown" here (in the case of quads/planes it means "failsafe": for example, return home and land)
     pi.set_servo_pulsewidth(right_motor_pin, 0)
     pi.set_servo_pulsewidth(left_motor_pin, 0)
     pi.stop()
