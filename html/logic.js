@@ -19,6 +19,7 @@ function connectToCommands() {
     });
     commandConnection.addEventListener('close', function (event) {
 	log("Command connection websocket close");
+	window.document.body.style.background = "darkred";
     });
     commandConnection.addEventListener('error', function (event) {
 	log("Command connection websocket error");
@@ -54,6 +55,7 @@ function connectToCamera() {
     });
     cameraConnection.addEventListener('close', function (event) {
 	log("Camera websocket close");
+	window.document.body.style.background = "darkred";
     });
     cameraConnection.addEventListener('error', function (event) {
 	log("Camera websocket error");
@@ -125,6 +127,7 @@ function connectToGPS() {
     });
     gpsConnection.addEventListener('close', function (event) {
 	log("GPS websocket closed");
+	window.document.body.style.background = "darkred";
     });
     gpsConnection.addEventListener('error', function (event) {
 	log("GPS websocket errored");
