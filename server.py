@@ -87,7 +87,7 @@ generate_static_pages()
 
 # (re)start camera stream
 Popen("killall libcamera-vid", shell=True).wait()  # stop old libcamera-vid, if any
-videoserver = Thread(target=keep_running, args=("libcamera-vid -t 0 --width 640 --height 480 --codec h264 --inline --listen -o tcp://0.0.0.0:8000", ), daemon=True)
+videoserver = Thread(target=keep_running, args=("libcamera-vid -t 0 --width 640 --height 360 --codec h264 --inline --listen -o tcp://0.0.0.0:8000 --autofocus-mode continuous 2>&1 | grep '^[^#;]'", ), daemon=True)
 videoserver.start()
 
 # (re)start websockify for camera stream (could actually handle from here and use as library)
